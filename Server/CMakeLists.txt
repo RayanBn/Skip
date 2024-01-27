@@ -12,6 +12,4 @@ target_include_directories(
     ${SOURCE_DIR}
 )
 
-target_link_libraries(${PROJECT_NAME}
-    asio
-)
+target_link_libraries(${PROJECT_NAME} asio::asio)

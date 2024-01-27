@@ -11,7 +11,3 @@ target_include_directories(
     ${PROJECT_NAME} PUBLIC
     ${SOURCE_DIR}
 )
-
-target_link_libraries(${PROJECT_NAME}
-    asio
-)

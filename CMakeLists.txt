@@ -3,6 +3,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 project("Skip")
 
+find_package(ASIO REQUIRED)
+
 # GTEST
 include(FetchContent)
 FetchContent_Declare(
@@ -14,14 +16,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# ASIO
-FetchContent_Declare(asio-cmake
-  GIT_REPOSITORY https://github.com/kingsamchen/asio-cmake.git
-  GIT_TAG        origin/master
-)
-
-set(ASIO_CMAKE_ASIO_TAG asio-1-28-0)
-FetchContent_MakeAvailable(asio-cmake)
 
 add_subdirectory(Client)
 add_subdirectory(Server)
