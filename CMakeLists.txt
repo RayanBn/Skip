@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 project("Skip")
 
 find_package(ASIO REQUIRED)
+find_package(Qt6 REQUIRED)
 
 # GTEST
 include(FetchContent)
@@ -16,6 +17,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+add_subdirectory(lib)
 
 add_subdirectory(Client)
 add_subdirectory(Server)

@@ -1,5 +1,7 @@
 [requires]
 asio/1.29.0
+qt/6.6.1
+libmysqlclient/8.1.0
 
 [generators]
 CMakeDeps

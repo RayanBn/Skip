@@ -9,7 +9,11 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 
 target_include_directories(
     ${PROJECT_NAME} PUBLIC
-    ${SOURCE_DIR}
+    src
+    ${CMAKE_SOURCE_DIR}/lib/SkipPacket/include
 )
 
-target_link_libraries(${PROJECT_NAME} asio::asio)
+target_link_libraries(${PROJECT_NAME}
+    SkipPacket
+    asio::asio
+)

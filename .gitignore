@@ -31,5 +31,7 @@
 *.out
 *.app
 
-build/
+build*
 CMakeUserPresets.json
+.vscode
+.env

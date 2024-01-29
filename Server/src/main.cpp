@@ -1,6 +1,7 @@
 #include <iostream>
+#include "SkipPacket/SkipPacket.hpp"
 
-int main() {
-    std::cout << "Hello, from server !" << std::endl;
+int main()
+{
     return 0;
 }
