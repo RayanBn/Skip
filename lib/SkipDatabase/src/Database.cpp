@@ -12,11 +12,12 @@ SkipDatabase::Database::Database() :
     const char *password = std::getenv("DATABASE_PASSWORD");
     const char *database = std::getenv("DATABASE_NAME");
 
-    std::cout << "Connecting to database..." << std::endl;
-    if (mysql_real_connect(this->_con, host, user, password, database, 0, NULL, 0) == NULL) {
+    try {
+        if (mysql_real_connect(this->_con, host, user, password, database, 0, NULL, 0) == NULL)
+            throw std::exception();
+    } catch (std::exception &e) {
         std::cout << mysql_error(this->_con) << std::endl;
     }
-    std::cout << "Connected to database!" << std::endl;
 }
 
 SkipDatabase::Database::~Database()
@@ -34,9 +35,9 @@ void SkipDatabase::Database::query(const std::string &query)
     }
 }
 
-MYSQL &SkipDatabase::Database::getConnection() const
+MYSQL *SkipDatabase::Database::getConnection() const
 {
-    return *this->_con;
+    return this->_con;
 }
 
 SkipDatabase::User SkipDatabase::Database::getUser(const std::string &username)
@@ -127,4 +128,26 @@ void SkipDatabase::Database::updateUser(const size_t id, const std::string &user
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
+}
+
+std::vector<SkipDatabase::User> SkipDatabase::Database::getUsers()
+{
+    try {
+        MYSQL_RES *result;
+        MYSQL_ROW row;
+        std::string query = "SELECT ID, Username, Password, Email FROM Users";
+        std::vector<SkipDatabase::User> users;
+
+        this->query(query);
+        result = mysql_store_result(this->_con);
+        if (result == NULL)
+            throw std::exception();
+        while ((row = mysql_fetch_row(result))) {
+            users.push_back(SkipDatabase::User(std::stoi(row[0]), row[1], row[2], row[3]));
+        }
+        return users;
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+    return std::vector<SkipDatabase::User>();
 }

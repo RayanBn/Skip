@@ -10,7 +10,6 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 target_include_directories(
     ${PROJECT_NAME} PUBLIC
     src
-    ${CMAKE_SOURCE_DIR}/lib/SkipPacket/include
 )
 
 target_link_libraries(${PROJECT_NAME}

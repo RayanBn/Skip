@@ -19,7 +19,7 @@ namespace SkipDatabase
             Database();
             ~Database();
 
-            MYSQL &getConnection() const;
+            MYSQL *getConnection() const;
 
             // USER
             SkipDatabase::User getUser(const std::string &username);
